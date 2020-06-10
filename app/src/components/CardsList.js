@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import { connect, useDispatch, useSelector } from 'react-redux'
 
 import {addCard, deleteCard} from '../actions'
@@ -30,18 +30,18 @@ const filterCards = cards => {
 
     return (
         <div>
-        {!isFetchingData &&  <input  //removed props.
+        { cards.length!==0 &&  //removed props.
+         <input  
             placeholder='search through cards'
             value={searchTerm}
             onChange={(e) => {setSearchTerm(e.target.value)}}
             />}
 
-            <button onClick={() => { dispatch(addCard(searchTerm)); setSearchTerm('') }}>+</button>
+{cards.length!==0 &&  <button onClick={() => { dispatch(addCard(searchTerm)); setSearchTerm('') }}>+</button>}
 
         <div className='allCards'>
 
-            {error ? <div className='error'> {error} </div> : filterCards(cards).map(card => {
-                 //removed props. from errorx2 and cards
+            {error ? <div className='error'> {error} </div> : filterCards(cards).map(card => {                 //removed props. from errorx2 and cards
                 return (
                     <div className='card-card' key={card.id}>
                          <button onClick={() => dispatch(deleteCard(card))} className='deleteBtn'>x</button>
